@@ -1,2 +1,2 @@
-*octave.ipynb linguist-language=Octave
-*python.ipynb linguist-language=Python
+Octave/**/*ipynb linguist-language=Octave
+Python/**/*ipynb linguist-language=Python
