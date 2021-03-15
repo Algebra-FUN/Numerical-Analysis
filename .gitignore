@@ -1,0 +1,9 @@
+.ipynb_checkpoints
+.vscode
+__pycache__
+dist
+build
+*.egg-info
+test.py
+setup.py
+upload.bat
