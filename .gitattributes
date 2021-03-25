@@ -1,2 +1,3 @@
+Julia/**/*.ipynb linguist-language=Julia
 Octave/**/*.ipynb linguist-language=Octave
 Python/**/*.ipynb linguist-language=Python
