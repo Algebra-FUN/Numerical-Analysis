@@ -9,12 +9,16 @@ function matrix2latex(M)
     return "\\begin{bmatrix}$(matrix_str)\\end{bmatrix}"
 end
 
+function matrix_form(name::String,M)
+    return "<center>``"*name*"="*matrix2latex(M)*"``</center>"
+end
+
 function matrix_form(symbol::Symbol,M)
-    return "<center>``"*String(symbol)*"="*matrix2latex(M)*"``</center>" |> Markdown.parse
+    return matrix_form(String(symbol),M)
 end
 
 macro latex(M::Symbol)
-    return matrix_form(M,M |> eval)
+    return matrix_form(M,M |> eval) |> Markdown.parse
 end
 
 macro latex(expr::Expr)
@@ -23,7 +27,7 @@ macro latex(expr::Expr)
         right = expr.args[2] |> eval
         if typeof(left) == Symbol && typeof(right) in (Array{Float64,2},Vector{Float64})
             expr |> eval
-            return matrix_form(left,right)
+            return matrix_form(left,right) |> Markdown.parse
         end
     end
     return expr
