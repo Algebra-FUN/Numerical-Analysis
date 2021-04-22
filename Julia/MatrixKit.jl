@@ -1,6 +1,8 @@
 using LambdaFn
 import Markdown
 
+eye(n) = Matrix{Float64}(I,n,n)
+
 function matrix2latex(M)
     rows_str = @λ(join(M[_,:],'&')) |> @λ map(_,1:size(M)[1])
     matrix_str = join(rows_str,"\\\\")
@@ -8,8 +10,7 @@ function matrix2latex(M)
 end
 
 function matrix_form(symbol::Symbol,M)
-    symbolname = String(symbol)
-    return "<center>``"*symbolname*"="*matrix2latex(M)*"``</center>" |> Markdown.parse
+    return "<center>``"*String(symbol)*"="*matrix2latex(M)*"``</center>" |> Markdown.parse
 end
 
 macro latex(M::Symbol)
