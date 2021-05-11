@@ -6,7 +6,7 @@ eye(n) = Matrix{Float64}(I,n,n)
 function matrix2latex(M)
     rows_str = @λ(join(M[_,:],'&')) |> @λ map(_,1:size(M)[1])
     matrix_str = join(rows_str,"\\\\")
-    return "\\begin{bmatrix}$matrix_str\\end{bmatrix}"
+    return "\\begin{pmatrix}$matrix_str\\end{pmatrix}"
 end
 
 centralize(content::String) = "<center>$content</center>"
@@ -23,7 +23,7 @@ macro latex(expr::Expr)
     if expr.head == :(=)
         left = expr.args[1]
         right = expr.args[2] |> eval
-        if typeof(left) == Symbol && typeof(right) in (Array{Float64,2},Vector{Float64})
+        if typeof(left) == Symbol && any(typeof(right) .<: (Matrix,Vector))
             expr |> eval
             return matrix_form(left,right) |> centralize |> Markdown.parse
         end
