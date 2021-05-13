@@ -19,6 +19,13 @@ macro latex(M::Symbol)
     return matrix_form(M,M |> eval) |> centralize |> Markdown.parse
 end
 
+macro latex(M::Symbol,T::Symbol)
+    if T == :T
+        return matrix_form(M,(M |> eval)')*"``^T``" |> centralize |> Markdown.parse
+    end
+    return matrix_form(M,M |> eval) |> centralize |> Markdown.parse
+end
+
 macro latex(expr::Expr)
     if expr.head == :(=)
         left = expr.args[1]
