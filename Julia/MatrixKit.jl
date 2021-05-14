@@ -9,9 +9,9 @@ function matrix2latex(M)
     return "\\begin{pmatrix}$matrix_str\\end{pmatrix}"
 end
 
-centralize(content::String) = "<center>$content</center>"
+centralize(content::String) = "<center>``$content``</center>"
 
-matrix_form(name::String,M) = "``"*name*"="*matrix2latex(M)*"``"
+matrix_form(name::String,M) = ""*name*"="*matrix2latex(M)*""
 
 matrix_form(symbol::Symbol,M) = matrix_form(String(symbol),M)
 
@@ -21,7 +21,7 @@ end
 
 macro latex(M::Symbol,T::Symbol)
     if T == :T
-        return matrix_form(M,(M |> eval)')*"``^T``" |> centralize |> Markdown.parse
+        return matrix_form(M,(M |> eval)')*"^T" |> centralize |> Markdown.parse
     end
     return matrix_form(M,M |> eval) |> centralize |> Markdown.parse
 end
