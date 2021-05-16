@@ -10941,9 +10941,6 @@ div.output_area {
   flex-direction: row;
   align-items: stretch;
 }
-div.MathJax_Display {
-  text-align: center !important;
-}
 div.output_area .rendered_html table {
   margin-left: 0;
   margin-right: 0;
@@ -13068,7 +13065,7 @@ div#notebook {
         // we use CSS to left justify single line equations in code cells.
         displayAlign: 'center',
         "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
+            styles: {'.MathJax_Display': {"text-align": "center !important"}},
             linebreaks: { automatic: true }
         }
     });
